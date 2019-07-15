@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="heading-layout">
+    <h2>{{ pageTitle }}</h2>
+  </div>
+  <div class="property-name">
+    <h3 title="{{ propertyName }}">{{ propertyName }}</h3>
+  </div>
+  <!-- div having the angular mat-progress-bar -->
+  <div class="bar-container">
+    <div style="padding: 20px; padding-top: 0">
+      <h3 title="Occupancy">Occupancy</h3>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="occupancyValue"
+      ></mat-progress-bar>
+      <label
+        title="Occupancy {{ occupancyValue }} %"
+        class="occupancy"
+        *ngIf="occupancyValue > 0"
+        >{{ tenantArea }} SF ({{ occupancyValue }} %)</label
+      >
+    </div>
+  </div>
+  <div class="prop-desc">
+    <div class="prop-details">
+      <h3>Property</h3>
+      <p>
+        <label>Name</label>
+        <input title="Property Name" [(ngModel)]="propertyName" />
+      </p>
+      <p>
+        <label>Rentable Area</label>
+        <span>$</span>
+        <!-- getting the input value from user using #reference, calling the function to calculate occupancy value -->
+        <input
+          #rentableValue
+          (keyup)="calculateOccupancy(rentableValue, tenantValue)"
+          title="Rentable Area"
+          style="width: 190px"
+        />
+      </p>
+    </div>
+
+    <div class="tenant-details">
+      <h3>Tenant</h3>
+      <p>
+        <label>Tenant Name</label>
+        <input title="Tenant Name" />
+      </p>
+      <p>
+        <label>Tenant Area</label>
+        <span>SF</span>
+        <!-- getting the input value from user using #reference, calling the function to calculate occupancy value -->
+        <input
+          #tenantValue
+          (keyup)="calculateOccupancy(rentableValue, tenantValue)"
+          title="Tenant Area"
+          style="width: 180px"
+        />
+      </p>
+    </div>
+  </div>
+</div>
